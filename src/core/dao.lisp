@@ -344,7 +344,7 @@
           (setf ,class (ensure-class ,class))
           (let* ((sxql:*sql-symbol-conversion* #'unlispify)
                  (,sql
-                   (sxql:select :*
+                   (sxql:select (intern (format nil "~A.*" (table-name ,class)) :keyword)
                                 (sxql:from (sxql:make-sql-symbol (table-name ,class)))))
                  (,include-classes '()))
             (macrolet ((where (expression)
